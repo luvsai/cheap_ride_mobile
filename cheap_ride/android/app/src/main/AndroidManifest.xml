@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.luvsai.cheap_ride">
-   <application
+    package="com.example.cheap_ride">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
         android:label="cheap_ride"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

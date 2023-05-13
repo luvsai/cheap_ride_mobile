@@ -1,89 +1,135 @@
+import 'package:cheap_ride/Views/LoginScreens.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:share_plus/share_plus.dart';
+import 'dart:async';
+import './../utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-  final appname = "cheapride" ;
-
+class SplashScr extends StatefulWidget {
+  const SplashScr({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScr> createState() => _SplashScrState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScrState extends State<SplashScr> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Widget dest ;
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.appname),
-        ),
-        body: Center(
+    print("system height : " + SyswideSharedProps.screenHeight.toString()) ;
 
-          child: Stack( children: [
+    Timer(Duration(seconds: 4),
+            ()=> Navigator.pushReplacement(context,
+            MaterialPageRoute(builder:
+                (context) =>
+                SendOTP()
+            )
+        )
+    );
+    return Scaffold(
+      //backgroundColor: Color(0xFF7EF262),
+
+      body: Stack(
+
+        children: [
+
+          //  Align(
+          //   alignment: Alignment.center,
+          //   child:  Text(widget.app_name),
+          // )
+//---
+          Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color(0xFF5FFFEB),
+                    Colors.green,
+                  ],
+                )
+            ),
+          ),
+
+          Align(
+            alignment: Alignment.center,
+
+            child:
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: new Text('Datetime',
-                      style: new TextStyle(color: Colors.grey)
-                  ),
-                ),
-                // FittedBox(
-                //   child: Image.asset('assets/images/back.png'),
-                //   fit: BoxFit.fill,
-                // )
-                Image(image: AssetImage('assets/images/back.png'),fit: BoxFit.cover),
+                Image(image: AssetImage('assets/images/newlogo.png'), height: 140,
+                  width: 140,
+                  fit: BoxFit.fitHeight,),
+                //Text("CheapAuto" ,style: TextStyle(fontSize: 20),)
               ],
             ),
 
-            Column(
-              children: [
-                GestureDetector(
-                  // When the child is tapped, show a snackbar.
-                  onTap: () {
-                    // const snackBar = SnackBar(content: Text('Tap'));
-                    //
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  },
-                  // The custom button
-                  child: Container(
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: Colors.lightBlue,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: const Text('My Button'),
-                  ),
-                ),
-                Text("CheapRide ..."),
-                Lottie.network(
-                    'https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
-                IconButton(
-                  // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                    icon: FaIcon(FontAwesomeIcons.gamepad),
-                    onPressed: () { print("Pressed"); }
-                ),
-                IconButton(
-                  // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                    icon: FaIcon(FontAwesomeIcons.chrome, color: Colors.purple,),
-                    onPressed: () {
-                      print("Pressed");
-                      // Share.share('check out my website https://example.com');
-                    }
-                ),
-              ],
-            )
-          ],)
+          ),
 
+          // Align(
+          //   alignment: Alignment.bottomRight,
+          //
+          //   child:   SafeArea(
+          //     child: InkWell(
+          //
+          //
+          //       child:  Padding(
+          //         padding: EdgeInsets.all(5),
+          //         child: Ink(
+          //
+          //           width: 155,
+          //           height: 48,
+          //           decoration: BoxDecoration(
+          //             borderRadius: BorderRadius.circular(12),
+          //             color: Color(0xffff5612),
+          //           ),
+          //           padding:  EdgeInsets.all(8),
+          //
+          //           child: Column(
+          //
+          //             mainAxisSize: MainAxisSize.min,
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             crossAxisAlignment: CrossAxisAlignment.center,
+          //             children:[
+          //               Padding(
+          //                 padding: EdgeInsets.symmetric(horizontal: 10, ),
+          //
+          //                 child: Row(
+          //                   mainAxisSize: MainAxisSize.min,
+          //                   mainAxisAlignment: MainAxisAlignment.center,
+          //                   crossAxisAlignment: CrossAxisAlignment.center,
+          //                   children:[
+          //                     Text(
+          //                       "Next",
+          //                       style: TextStyle(
+          //                         color: Colors.white,
+          //                         fontSize: 16,
+          //                         fontFamily: "SF Pro Text",
+          //                         fontWeight: FontWeight.w600,
+          //                       ),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //       onTap: ()  {
+          //         print("Next clidked");
+          //       },
+          //     ),
+          //   ),
+          // ),
 
+          //--
+        ],
 
-        )
+      ),
     );
   }
 }
-
-
-

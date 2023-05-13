@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
+import 'utility.dart' ;
+import './Views/SplashScreen.dart' ;
 
 void main() {
-  runApp(const MyApp());
-  //runApp(const SplashScreen());
+  runApp(MaterialApp(home :Start()));
+}
+
+
+
+//function called during app initialization // Initialize the app
+Widget initialize(BuildContext context,MediaQueryData mediaQueryData){
+
+  //initialize the screenHeight and screenWidth of the Mobile screen
+
+  SyswideSharedProps.screenHeight = mediaQueryData.size.height ;
+  SyswideSharedProps.screenWidth = mediaQueryData.size.width ;
+
+  return SplashScr();
+
+
+}
+
+class Start extends StatelessWidget {
+  const Start({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQueryData = MediaQuery.of(context);
+    return  initialize(context,mediaQueryData) ; Builder(builder: (BuildContext context) {
+      return initialize(context,mediaQueryData)  ;
+    }
+
+
+    );
+  }
 }
 
 
@@ -10,8 +41,18 @@ void main() {
 
 
 
+
+
+
+
+
+
+
+
+//-- ignore below
+
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -20,118 +61,23 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
-
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: const SplashScreen( app_name: "CheapRide",),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
-
-
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key, required this.app_name}) : super(key: key);
-
-  final String app_name;
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFF7EF262),
-      body: Stack(
-
-        children: [
-
-          //  Align(
-          //   alignment: Alignment.center,
-          //   child:  Text(widget.app_name),
-          // )
-//---
-
-
-          Column(
-            children: [
-
-            ],
-          ),
-
-          Align(
-            alignment: Alignment.bottomRight,
-
-            child:   SafeArea(
-              child: InkWell(
-
-
-                child:  Padding(
-                  padding: EdgeInsets.all(5),
-                  child: Ink(
-
-                    width: 155,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Color(0xffff5612),
-                    ),
-                    padding:  EdgeInsets.all(8),
-
-                    child: Column(
-
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children:[
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10, ),
-
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children:[
-                              Text(
-                                "Next",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: "SF Pro Text",
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                onTap: ()  {
-                  print("Next clidked");
-                },
-              ),
-            ),
-          ),
-
-          //--
-        ],
-
-      ),
-    );
-  }
-}
-
-
-
-
-
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect

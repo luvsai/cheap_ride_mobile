@@ -11,6 +11,7 @@ import json
 import numpy as np
 
 
+
 grid = utils.bgrid["grid"]
 grid = np.array(grid)
 def nearest_coordinates(grid, A):

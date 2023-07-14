@@ -2,12 +2,26 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import math
 import random
+from firebase_admin.auth import  create_user
+from twilio.rest import Client
+
+account_sid = 'AC6277ba0a151fec7eb3693dec8276b91d'
+auth_token = 'c70835edbd4fff5a6cd0673097924b70'
+client = Client(account_sid, auth_token)
+
 
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
 from . import utilities, dbhelper
 import json
 
+# path to firebase key
+fbpath = "/Users/luvsai/Desktop/FBprivatekey/cheapride-38303-firebase-adminsdk-i72s3-2ab22e4966.json"
+import firebase_admin
+from firebase_admin import credentials
+
+cred = credentials.Certificate(fbpath)
+firebase_admin.initialize_app(cred)
 
 def index(request):
     return HttpResponse("""Cheap auto users api is working.<br> <pre _ngcontent-jsv-c99="" class="form-control-static">_______________                                _______         _____        
@@ -60,6 +74,19 @@ def login(request):
 
             # send otp to the mobile using messaging system
             # TODO
+            try:
+                # Create the user with the specified phone number and OTP
+                # message = client.messages.create(
+                #     body='Your OTP: '+ otp + " for logging into CheapRide",  # Replace with the desired message content
+                #     from_='+918179233514',  # Replace with your Twilio phone number
+                #     to="+91"+ phone # Replace with the recipient's phone number
+                # )
+
+                # print(f"SMS sent successfully with SID: {message.sid}")
+
+                print(f"OTP sent successfully to {phone}")
+            except Exception as e:
+                print(f"Error sending OTP: {e}")
 
             print(logging_users)  # TODO remove
             dic = {"status": "200 OK", "code": "1",
@@ -93,13 +120,13 @@ def login(request):
                     dbhelper.savelogging_users(logging_users)
                     return JsonResponse(dic)
             else:
-                dic = {"status": "400 OK", "code": "4",
+                dic = {"status": "200 OK", "code": "4",
                        "des": "OTP doesn't match", "usertoken": ""}
                 return JsonResponse(dic)
 
         else:
             # ask the user
-            dic = {"status": "400 OK", "code": "5",
+            dic = {"status": "200 OK", "code": "5",
                    "des": "OTP not valid", "usertoken": ""}
 
             return JsonResponse(dic)

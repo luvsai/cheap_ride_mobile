@@ -61,6 +61,9 @@ def readau():
 
 
 def readrac():
+    """
+    to read account requested users
+    """
     collection_name = dbname["requested_account_creation"]
     cd = collection_name.find({})
     collectiondata = []
